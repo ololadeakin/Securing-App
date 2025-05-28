@@ -73,5 +73,12 @@ def home():
 
 # 👆 We're continuing from the steps above. Append this to your server.py file.
 
+# ✅ Lab Requirement: Protected Page
+@app.route('/protected')
+def protected():
+    if 'user' not in session:
+        return redirect('/login')
+    return render_template("protected.html", user=session['user'])
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=env.get("PORT", 3000))
