@@ -8,17 +8,14 @@ from authlib.integrations.flask_client import OAuth
 from dotenv import find_dotenv, load_dotenv
 from flask import Flask, redirect, render_template, session, url_for
 
-# 👆 We're continuing from the steps above. Append this to your server.py file.
 
 ENV_FILE = find_dotenv()
 if ENV_FILE:
     load_dotenv(ENV_FILE)
 
-# 👆 We're continuing from the steps above. Append this to your server.py file.
 app = Flask(__name__)
 app.secret_key = env.get("APP_SECRET_KEY")
 
-# 👆 We're continuing from the steps above. Append this to your server.py file.
 
 oauth = OAuth(app)
 
@@ -32,7 +29,6 @@ oauth.register(
     server_metadata_url=f'https://{env.get("AUTH0_DOMAIN")}/.well-known/openid-configuration'
 )
 
-# 👆 We're continuing from the steps above. Append this to your server.py file.
 
 @app.route("/login")
 def login():
@@ -40,7 +36,6 @@ def login():
         redirect_uri=url_for("callback", _external=True)
     )
 
-# 👆 We're continuing from the steps above. Append this to your server.py file.
 
 @app.route("/callback", methods=["GET", "POST"])
 def callback():
@@ -48,7 +43,6 @@ def callback():
     session["user"] = token
     return redirect("/")
 
-# 👆 We're continuing from the steps above. Append this to your server.py file.
 
 @app.route("/logout")
 def logout():
@@ -65,15 +59,12 @@ def logout():
         )
     )
 
-# 👆 We're continuing from the steps above. Append this to your server.py file.
 
 @app.route("/")
 def home():
     return render_template("home.html", session=session.get('user'), pretty=json.dumps(session.get('user'), indent=4))
 
-# 👆 We're continuing from the steps above. Append this to your server.py file.
 
-# ✅ Lab Requirement: Protected Page
 @app.route('/protected')
 def protected():
     if 'user' not in session:
