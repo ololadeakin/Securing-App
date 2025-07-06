@@ -17,7 +17,7 @@ Create a .env file:
 AUTH0_CLIENT_ID=your_client_id
 AUTH0_CLIENT_SECRET=your_secret
 AUTH0_DOMAIN=your-tenant.auth0.com
-APP_SECRET_KEY=your_random_secret_key
+APP_SECRET_KEY=your_random_secret_keyy
 
 ```
 ### 3. Run the App
