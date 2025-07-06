@@ -7,7 +7,12 @@ from urllib.parse import quote_plus, urlencode
 from authlib.integrations.flask_client import OAuth
 from dotenv import find_dotenv, load_dotenv
 from flask import Flask, redirect, render_template, session, url_for, request
+import sys
 
+# Set up logging
+handler = logging.StreamHandler(sys.stdout)
+formatter = logging.Formatter('[%(levelname)s] %(message)s')
+handler.setFormatter(formatter)
 # Load .env variables
 ENV_FILE = find_dotenv()
 if ENV_FILE:
@@ -18,7 +23,9 @@ app = Flask(__name__)
 app.secret_key = env.get("APP_SECRET_KEY")
 
 # Set up logging
-logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.INFO)
+# app.logger.setLevel(logging.INFO)
+app.logger.addHandler(handler)
 app.logger.setLevel(logging.INFO)
 
 # Register Auth0 with OAuth
