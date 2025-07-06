@@ -1,0 +1,18 @@
+### Visit home page
+GET http://localhost:3000/
+
+### Attempt to access protected route without login (unauthorized)
+GET http://localhost:3000/protected
+
+### Start login flow (redirect to Auth0)
+GET http://localhost:3000/login
+
+### Callback simulation (only works after Auth0 redirects — for manual test)
+GET http://localhost:3000/callback?code=example_code&state=example_state
+
+### Access protected route after login (must set session manually if testing without browser)
+GET http://localhost:3000/protected
+Cookie: session=your_flask_session_cookie_here
+
+### Logout
+GET http://localhost:3000/logout
